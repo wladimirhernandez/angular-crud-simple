@@ -16,8 +16,24 @@ export class AppComponent {
     {id: 4, name: 'Max', country: 'USA'}
   ]
   selectedEmployee: Employee = new Employee();
-}
+  
+  addOrEdit() {
+    if(this.selectedEmployee.id == 0){
+      this.selectedEmployee.id = this.employeeArray.length + 1;
+      this.employeeArray.push(this.selectedEmployee);
+    }
+    this.selectedEmployee = new Employee();
+  }
 
-addOrEdit() {
-  this.selectedEmployee.id = this.employeeArray
+  openForEdit(employee: Employee){
+    this.selectedEmployee = employee;
+  }
+
+  delete(){
+    if(confirm('Are you sure you want to delete it')){
+    this.employeeArray =  this.employeeArray.filter(x => x != this.selectedEmployee);
+    this.selectedEmployee = new Employee();
+  }
+    
+  }
 }

@@ -6,11 +6,13 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-8 offset-2 mt-4">
+      <div class="col-md-8 offset-md-2 mt-4">
         <ul class="list-group">
           <li
           *ngFor="let employee of employeeArray"
           class="list-group-item list-group-item-action"
+          (click)="openForEdit(employee)"
+          [class.active]="employee == selectedEmployee"
           >
           <span class="badge badge-primary">{{employee.id}}</span>
           {{ employee.name }} -  {{ employee.country }}
@@ -28,16 +30,21 @@
             <div class="form-group">
                 <input type="text" [(ngModel)]="selectedEmployee.country" placeholder="Inser A Country" class="form-control">
               </div>
+              <div class="d-flex justify-content-between">
               <button (click)="addOrEdit()" class="btn btn-primary">
                 Submit
               </button>
+              <button (click)="delete()" *ngIf="selectedEmployee.id !== 0" class="btn btn-danger ml-auto">
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <footer class="text-muted bg-active fixed-bottom">
+  <footer class="text-muted bg-light fixed-bottom">
       <div class="container">
         <p>CRUD example by Wladimir Hernández - 2019</p>
       </div>
